@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import CountUp from "react-countup";
+import { Col, Statistic, Space, Rate, Row } from "antd";
 import "./MovieBox.css";
 
 export default function MovieBox() {
   let { id } = useParams();
   console.log(id);
   const [movie, setMovie] = useState([]);
+  const formatter = (value) => <CountUp end={value} separator="," />;
 
   const imageUrl = "https://image.tmdb.org/t/p/w500/";
+
+  var stars = movie.vote_average / 2;
+
+  console.log(stars);
 
   useEffect(() => {
     fetch(
@@ -15,7 +22,6 @@ export default function MovieBox() {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setMovie(data);
       });
   }, []);
@@ -29,6 +35,16 @@ export default function MovieBox() {
         <h1 id="title">{movie.title}</h1>
         <div className="description">
           <p>{movie.overview}</p>
+          <Row gutter={16} id="vote">
+            <Col span={12}>
+              <Statistic
+                title="Vote Count"
+                value={movie.vote_count}
+                formatter={formatter}
+              />
+            </Col>
+            <Rate disabled allowHalf value={stars} />
+          </Row>
         </div>
       </div>
     </div>

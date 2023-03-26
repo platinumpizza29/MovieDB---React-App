@@ -13,7 +13,6 @@ export default function HomePage() {
   let navigate = useNavigate();
   const [getMovies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
-  console.log(search);
   const imageUrl = "https://image.tmdb.org/t/p/w500/";
 
   useEffect(() => {
@@ -61,9 +60,7 @@ export default function HomePage() {
                 key={movie.id}
                 style={{ width: 300 }}
                 cover={<img alt="example" src={imageUrl + movie.poster_path} />}
-                actions={[
-                  <Rate disabled allowHalf value={movie.vote_average} />,
-                ]}
+                actions={[]}
                 onClick={() => navigate(`/moviebox/${movie.id}`)}
               >
                 <Meta title={movie.title} />

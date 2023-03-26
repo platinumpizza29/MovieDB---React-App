@@ -11,6 +11,7 @@
 .movieInfo {
   align-items: center;
   padding: 30px;
+  width: 100%;
 }
 
 #title {
@@ -21,4 +22,35 @@
   width: 30vw;
   margin-top: 20px;
   font-size: 1.5em;
+}
+
+#vote {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .MovieBox {
+    overflow-x: hidden;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #movieImg {
+    height: 70vh;
+    width: 70vw;
+  }
+
+  #title {
+    font-size: 2em;
+  }
+
+  .description {
+    padding: 10px;
+    width: 90vw;
+    margin-top: 20px;
+    font-size: 1.5em;
+  }
 }
