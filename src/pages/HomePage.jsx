@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./HomePage.css";
+import { motion } from "framer-motion";
 
 import { Card, Rate, Input } from "antd";
 
@@ -41,21 +42,27 @@ export default function HomePage() {
       <div className="movieContent">
         {getMovies
           .filter((item) => {
-            return search.toLowerCase() == ""
+            return search.toLowerCase() === ""
               ? item
               : item.title.toLowerCase().includes(search);
           })
-          .map((movie) => (
-            <Card
-              hoverable
-              id="movieContent"
-              key={movie.id}
-              style={{ width: 300 }}
-              cover={<img alt="example" src={imageUrl + movie.poster_path} />}
-              actions={[<Rate disabled defaultValue={movie.vote_average} />]}
+          .map((movie, i) => (
+            <motion.div
+              initial={{ opacity: 0, translateX: -50, translateY: -50 }}
+              animate={{ opacity: 1, translateX: 0, translateY: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <Meta title={movie.title} />
-            </Card>
+              <Card
+                hoverable
+                id="movieContent"
+                key={movie.id}
+                style={{ width: 300 }}
+                cover={<img alt="example" src={imageUrl + movie.poster_path} />}
+                actions={[<Rate disabled defaultValue={movie.vote_average} />]}
+              >
+                <Meta title={movie.title} />
+              </Card>
+            </motion.div>
           ))}
       </div>
     </div>
