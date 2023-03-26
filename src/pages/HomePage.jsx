@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 import { motion } from "framer-motion";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 import { Card, Rate, Input } from "antd";
+import MovieBox from "./MovieBox";
 
 const { Meta } = Card;
 const { Search } = Input;
 
 export default function HomePage() {
+  let navigate = useNavigate();
   const [getMovies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
   console.log(search);
@@ -58,7 +61,10 @@ export default function HomePage() {
                 key={movie.id}
                 style={{ width: 300 }}
                 cover={<img alt="example" src={imageUrl + movie.poster_path} />}
-                actions={[<Rate disabled defaultValue={movie.vote_average} />]}
+                actions={[
+                  <Rate disabled allowHalf value={movie.vote_average} />,
+                ]}
+                onClick={() => navigate(`/moviebox/${movie.id}`)}
               >
                 <Meta title={movie.title} />
               </Card>
