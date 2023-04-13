@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { useNavigate, useParams } from "react-router-dom";
 import CountUp from "react-countup";
 import { Col, Statistic, Space, Rate, Row } from "antd";
@@ -27,7 +28,12 @@ export default function MovieBox() {
   }, []);
 
   return (
-    <div className="MovieBox">
+    <motion.div
+      className="MovieBox"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, translateX: 0, translateY: 0 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+    >
       <div className="movieImage">
         <img src={imageUrl + movie.poster_path} id="movieImg" />
       </div>
@@ -47,6 +53,6 @@ export default function MovieBox() {
           </Row>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
